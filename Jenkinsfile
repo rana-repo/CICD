@@ -13,9 +13,11 @@ pipeline{
         }
         stage("code quality check using Sonarqube"){
             steps{
-                withSonarQubeEnv(credentialsId: 'sonar') {
-                    dir('java-source'){
-                        sh 'mvn  -U clean install sonar:sonar'
+                script{
+                        withSonarQubeEnv(credentialsId: 'sonar') {
+                            dir('java-source'){
+                                sh 'mvn  -U clean install sonar:sonar'
+                        }
                     }
                 }
             }
